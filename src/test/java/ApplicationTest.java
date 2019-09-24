@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static spark.Spark.awaitInitialization;
 
 public class ApplicationTest {
@@ -65,6 +65,18 @@ public class ApplicationTest {
                 "/transaction/" + transaction.getId());
         Transaction retrieved = gson.fromJson(res.getBody(), Transaction.class);
         assertEquals(transaction, retrieved);
+    }
+
+    @Test
+    public void deleteTransaction() {
+        TransactionPayload payload = getTestTransaction();
+        Transaction transaction = transactionService.add(payload.getSender(), payload.getReceiver(), payload.getAmount());
+
+        TestResponse res = client.request("DELETE",
+                "/transaction/" + transaction.getId());
+
+        assertNotNull(transaction);
+        assertEquals(res.getStatus(), 200);
     }
 
     @Test
