@@ -2,7 +2,6 @@ package service;
 
 import model.Model;
 import model.User;
-import utils.AccountException;
 import utils.UserException;
 
 import java.util.Collection;
@@ -13,7 +12,7 @@ import static java.util.Objects.isNull;
 
 public class UserService {
     public static User create(String name, String email) {
-        if ("".equals(name) && "".equals(email)) {
+        if ("".equals(name) || "".equals(email)) {
             throw new UserException(
                     "Name and email can not be empty", 400
             );
@@ -34,7 +33,7 @@ public class UserService {
     public static Map<String, String> delete(String id) {
         User user = Model.userFactory.delete(id);
         if (isNull(user)) {
-            throw new AccountException(
+            throw new UserException(
                     String.format("User with id# %s not found", id), 404
             );
         }

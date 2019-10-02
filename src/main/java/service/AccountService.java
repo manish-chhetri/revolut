@@ -31,11 +31,6 @@ public class AccountService {
 
     public static Account getById(String id) {
         Account account = getAccount(id);
-        if (isNull(account)) {
-            throw new AccountException(
-                    String.format("Account id# %s not found", id), 404
-            );
-        }
         return account;
     }
 
