@@ -1,7 +1,7 @@
 # revolut
 
-#To build the application
-mvn clean install
+**To build the application**
+<br />mvn clean install
 
-#To run the application
-java -jar target/revolut.jar
+**To run the application**
+<br />java -jar target/revolut.jar
